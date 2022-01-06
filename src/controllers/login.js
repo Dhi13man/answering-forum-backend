@@ -43,7 +43,7 @@ const validateUser = (username, password) =>
  * @return {Promise<boolean>} - A promise that resolves to a boolean denoting
  * whether the username and corresponding password exists in the database.
  */
-const authValidatedUser = async (username, password) => {
+export const authValidatedUser = async (username, password) => {
   const user = await getUser(username);
   return user && user.password === password;
 };

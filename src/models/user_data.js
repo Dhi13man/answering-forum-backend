@@ -14,7 +14,7 @@ export default class UserData {
      * @param {string} registrationName - The registration name of the user.
      */
   constructor(username, password, registrationName) {
-    this.registration_name = registrationName || username.split('@')[0];
+    this.registration_name = registrationName || (username || '').split('@')[0];
     this.password = password;
     this.username = username;
   }

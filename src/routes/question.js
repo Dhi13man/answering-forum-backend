@@ -1,12 +1,12 @@
 import {Router} from 'express';
 
-import registerController from '../controllers/register.js';
+import questionController from '../controllers/question.js';
 
 // Define express router.
 const questionRouter = new Router();
 
 // POST /login
-questionRouter.post('/question', registerController);
+questionRouter.post('/question', questionController);
 
 const unsupportedMessage =
         '/question only supports POST with user and question details.';

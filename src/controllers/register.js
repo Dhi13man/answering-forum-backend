@@ -58,8 +58,8 @@ const registerUser = async (userData, res) => {
       'registration-name': userData.registration_name,
     });
   } else {
-    res.status(401).json({
-      message: 'Failed to create user even though credentials were valid.',
-    });
+    throw new Error(
+        'Failed to create user even though credentials were valid.',
+    );
   }
 };
