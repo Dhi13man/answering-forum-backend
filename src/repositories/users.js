@@ -18,7 +18,7 @@ const usersDBPath = './src/database/users.json';
  */
 export const createUser = async (userData, dbPathOverride=usersDBPath) => {
   const users = await getDatabase(dbPathOverride);
-  if (userData.username === '' || userData.password === '') {
+  if (userData.username.length === 0 || userData.password.length === 0) {
     throw new Error('username and password are required.');
   }
   if (users[userData.username]) {
@@ -44,7 +44,8 @@ export const getUser = async (username, dbPathOverride=usersDBPath) => {
 /**
  * Updates the data of an existing user in the json database.
  * @param {string} username - Username of the user to be updated. Unchangeable.
- * @param {UserData} userData - Updated data of the user. username is ignored.
+ * @param {UserData} userData - Updated data of the user.
+ * userData.username is ignored.
  * @param {string} dbPathOverride - Override of the path to the
  * database to be used. Defaults to the default defined path usersDBPath.
  * @return {Promise<boolean>} A promise that resolves to whether the
@@ -57,11 +58,11 @@ export const updateUser = async (
     dbPathOverride=usersDBPath,
 ) => {
   const users = await getDatabase(dbPathOverride);
-  if (!username) {
+  if (username.length === 0) {
     throw new Error('Username is required.');
   }
   if (!users[username]) {
-    throw new Error('User doesn\'t exist.');
+    throw new Error(`User with username ${username} doesn't exist.`);
   }
   users[username] = {
     username: username,
@@ -72,7 +73,7 @@ export const updateUser = async (
 };
 
 /**
- * Deletes an user completely from the json database if they exist.
+ * Deletes an user completely from the database if they exist.
  * @param {string} username - of the user to be deleted.
  * @param {string} dbPathOverride - Override of the path to the
  * database to be used. Defaults to the default defined path usersDBPath.

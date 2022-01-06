@@ -37,7 +37,7 @@ export default questionController;
  * @param {Express.Response} res - The response object.
  */
 const askQuestion = async (questionInput, res) => {
-  const created = await createQuestion(questionInput);
+  const created = await createQuestion(questionInput.question);
   if (created) {
     res.status(201).json({
       'message': 'Question posted successfully',
