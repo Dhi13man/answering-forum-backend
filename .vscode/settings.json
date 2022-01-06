@@ -1,0 +1,9 @@
+{
+    "jest.jestCommandLine": "npm test -- --runInBand",
+    "jest.autoRun": {
+        "watch": false,
+        "onSave": "test-file"
+     },
+     "editor.formatOnSave": false,
+     "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+}

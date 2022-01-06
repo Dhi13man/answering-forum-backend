@@ -1,0 +1,45 @@
+{
+    "name": "stack-overflow-backend",
+    "version": "1.0.0",
+    "description": "A mock backend for Stack Overflow like messaging board created as a part of Swiggy i++",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "jest",
+        "build": "babel index.js -d dist",
+        "run": "npm run build & node index.js"
+    },
+    "keywords": [
+        "nodejs",
+        "express",
+        "REST",
+        "swiggy",
+        "swiggy-ipp",
+        "npm"
+    ],
+    "author": "dhi13man",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/cli": "^7.16.7",
+        "@babel/core": "^7.16.7",
+        "@babel/preset-env": "^7.16.7",
+        "babel-jest": "^27.4.6",
+        "eslint": "^8.6.0",
+        "eslint-config-google": "^0.14.0",
+        "jest": "^27.4.7",
+        "nodemon": "^2.0.15",
+        "regenerator-runtime": "^0.13.9"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.1",
+        "cookie-parser": "^1.4.6",
+        "express": "^4.17.2",
+        "fs": "^0.0.1-security",
+        "morgan": "^1.10.0"
+    },
+    "jest": {
+        "transform": {
+            "^.+\\.[t|j]sx?$": "babel-jest"
+        }
+    }
+}
