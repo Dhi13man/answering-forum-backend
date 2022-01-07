@@ -11,11 +11,14 @@ A Node.js Express backend for a Stackoverflow like answering forum, with RESTful
 
 ## Contents
 
-    - [Setup](#installation)
-    - [Usage](#usage)
-    - [License](#license)
-    - [Contributing](#contributing)
-    - [Tests](#tests)
+- [answering-forum-backend](#answering-forum-backend)
+  - [Contents](#contents)
+  - [Setup](#setup)
+  - [Usage](#usage)
+    - [Project Structure](#project-structure)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Tests](#tests)
 
 ## Setup
 
@@ -28,6 +31,48 @@ A Node.js Express backend for a Stackoverflow like answering forum, with RESTful
 ## Usage
 
 Run `npm run build` or `yarn build` to build and run the application on localhost:4000 (default).
+
+### Project Structure
+
+The project's code structure loosely follows MVC model while maintaing complete seperation of concern.
+
+- answering-forum-backend
+  - src
+    - controllers
+      - login.js
+      - question.js
+      - register.js
+    - database
+      - questions.json
+      - users.json
+    - models
+      - question_data.js
+      - user_data.js
+    - repositories
+      - questions.js
+      - users.js
+    - routes
+      - login.js
+      - question.js
+      - register.js
+    - utils
+      - validators.js
+    - index.js
+  - tests
+    - controllers
+      - login.test.js
+      - question.test.js
+      - register.test.js
+    - database
+      - questions.test.json
+      - users.test.json
+    - repositories
+      - questions.test.js
+      - users.test.js
+  - .eslintrc.yml
+  - babel.config.json
+  - package.json
+  - package-lock.json
 
 ## License
 
