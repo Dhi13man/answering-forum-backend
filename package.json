@@ -6,8 +6,7 @@
     "type": "module",
     "scripts": {
         "test": "jest",
-        "build": "babel index.js -d dist",
-        "run": "npm run build & node index.js"
+        "build": "node index.js"
     },
     "keywords": [
         "nodejs",
