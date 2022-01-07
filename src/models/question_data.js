@@ -29,7 +29,7 @@ export class QuestionInputModel {
    * to the id in the json object if both are given.
    * @return {QuestionInputModel} object of the QuestionModel.
    */
-  static fromJSON = (json, questionID=undefined) => {
+  static fromJSON = (json, questionID) => {
     const userDetails = json['user-details'] || json.user_details || {};
     const question = json.question || {};
     return new QuestionInputModel(
@@ -102,12 +102,13 @@ export class QuestionUser {
  * @property {string} title - The title of the question.
  * @property {string} body - The body of the question.
  * @property {number} question_id - The id of the question.
+ * @property {string} username - The username of the user asking the question.
  */
 export class QuestionData {
   /**
    * Constructor for the QuestionData model.
-   * @param {string} title - The username of the user.
-   * @param {string} body - The password of the user.
+   * @param {string} title - The title of the question.
+   * @param {string} body - The body of the question.
    * @param {number} questionID - The id of the question.
    * @param {string} username - The username of the user asking the question.
    */

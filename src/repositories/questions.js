@@ -63,10 +63,10 @@ export const getQuestion = async (
 };
 
 /**
- * Update a new question in the database.
+ * Update an existing question in the database.
  * @param {string} questionID - The ID of the question to be updated.
- * @param {QuestionData} question - The input data of the
- * question to be updated. question.question_id is ignored
+ * @param {QuestionData} question - The data of the question to be updated.
+ * question.question_id is ignored as it cannot be changed.
  * @param {string} dbPathOverride - Override of the path to the
  * database to be used. Defaults to the default defined path questionsDBPath.
  * @return {Promise<boolean>} A promise that resolves to whether the
@@ -94,7 +94,7 @@ export const updateQuestion = async (
 };
 
 /**
- * Deletes a question completely from the database if they exist.
+ * Deletes a question completely from the database if it exists.
  * @param {string} questionID - ID of the user to be deleted.
  * @param {string} dbPathOverride - Override of the path to the
  * database to be used. Defaults to the default defined path usersDBPath.
@@ -131,7 +131,7 @@ const invalidQuestionError = () =>
   new Error('Question must have a title and should have generated an ID.');
 
 /**
- * Creates error that is thrown when the question corresponding to the ID
+ * Creates error that is thrown when the question corresponding to the ID.
  * already exists.
  * @param {string} id - ID of the question that already exists.
  * @return {Error} An error object for already existing questions.
@@ -140,7 +140,7 @@ const alreadyExistsError = (id) =>
   new Error(`Question with ID ${id} already exists.`);
 
 /**
- * Creates error that is thrown when the question corresponding to the ID
+ * Creates error that is thrown when the question corresponding to the ID.
  * does not exist.
  * @param {string} id - ID of the question that does not exist.
  * @return {Error} An error object for non-existing questions.
