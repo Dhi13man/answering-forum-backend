@@ -1,5 +1,5 @@
-import {getUser} from '../repositories/users.js';
-import {validateEmail, validatePassword} from '../utils/validators.js';
+import {getUser} from '../repositories/users';
+import {validateEmail, validatePassword} from '../utils/validators';
 
 /**
  * Used by /login route to log in a user into the application by validating

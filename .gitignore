@@ -1,5 +1,10 @@
+# npm i will generate this.
 node_modules/
 
+# Babel will generate this.
+lib/
+
+# You can have different VSCode settings.
 .vscode/formatter.json
 .vscode/launch.json
 .vscode/settings.json

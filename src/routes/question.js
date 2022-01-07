@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-import questionController from '../controllers/question.js';
+import questionController from '../controllers/question';
 
 // Define express router.
 const questionRouter = new Router();

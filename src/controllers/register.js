@@ -1,6 +1,6 @@
-import UserData from '../models/user_data.js';
-import {createUser} from '../repositories/users.js';
-import {validateEmail, validatePassword} from '../utils/validators.js';
+import UserData from '../models/user_data';
+import {createUser} from '../repositories/users';
+import {validateEmail, validatePassword} from '../utils/validators';
 
 /**
  * Used by /register route to register an user by creating their record

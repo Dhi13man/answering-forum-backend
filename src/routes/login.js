@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-import loginController from '../controllers/login.js';
+import loginController from '../controllers/login';
 
 // Define express router.
 const loginRouter = new Router();

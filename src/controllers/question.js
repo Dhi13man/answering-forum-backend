@@ -1,6 +1,6 @@
-import {QuestionInputModel} from '../models/question_data.js';
-import {createQuestion, getNextQuestionID} from '../repositories/questions.js';
-import {authValidatedUser} from './login.js';
+import {QuestionInputModel} from '../models/question_data';
+import {createQuestion, getNextQuestionID} from '../repositories/questions';
+import {authValidatedUser} from './login';
 
 /**
  * Used by /question route to log in a user into the application by validating

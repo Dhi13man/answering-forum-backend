@@ -2,11 +2,10 @@
     "name": "stack-overflow-backend",
     "version": "1.0.0",
     "description": "A mock backend for Stack Overflow like messaging board created as a part of Swiggy i++",
-    "main": "index.js",
-    "type": "module",
+    "main": "./src/index.js",
     "scripts": {
         "test": "jest",
-        "build": "node index.js"
+        "build": "babel src -d lib & node ./lib/index.js"
     },
     "keywords": [
         "nodejs",

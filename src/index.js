@@ -2,9 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 
-import loginRouter from './src/routes/login.js';
-import registerRouter from './src/routes/register.js';
-import questionRouter from './src/routes/question.js';
+import loginRouter from './routes/login';
+import registerRouter from './routes/register';
+import questionRouter from './routes/question';
 
 // Define express app.
 const app = express();

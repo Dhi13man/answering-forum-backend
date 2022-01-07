@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-import UserData from '../models/user_data.js';
+import UserData from '../models/user_data';
 
 /**
  * Path to the Users database.

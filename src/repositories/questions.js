@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-import {QuestionData} from '../models/question_data.js';
+import {QuestionData} from '../models/question_data';
 
 /**
  * Path to the Users database.
