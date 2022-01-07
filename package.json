@@ -2,7 +2,7 @@
     "name": "stack-overflow-backend",
     "version": "1.0.0",
     "description": "A mock backend for Stack Overflow like messaging board created as a part of Swiggy i++",
-    "main": "./src/index.js",
+    "main": "./lib/index",
     "scripts": {
         "test": "jest",
         "build": "babel src -d lib & node ./lib/index"
