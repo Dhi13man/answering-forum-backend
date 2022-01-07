@@ -1,4 +1,4 @@
-import loginController from '../../src/controllers/login';
+import loginController from '../../src/controllers/login_post';
 
 describe('Login Controller Tests', () => {
   // Dummy User data

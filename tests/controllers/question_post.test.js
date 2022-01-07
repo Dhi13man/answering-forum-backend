@@ -1,4 +1,4 @@
-import questionController from '../../src/controllers/question';
+import questionController from '../../src/controllers/question_post';
 import {QuestionInputModel} from '../../src/models/question_data';
 import {
   getNextQuestionID,

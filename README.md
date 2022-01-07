@@ -28,9 +28,11 @@ A Node.js Express backend for a Stackoverflow like answering forum, with RESTful
 
 2. Run `npm install` or `yarn install` to install the dependencies.
 
+3. Run `npm run build` or `yarn build` once to let babel build the application on ./lib/.
+
 ## Usage
 
-Run `npm run build` or `yarn build` to build and run the application on localhost:4000 (default).
+Run `npm run start` or `yarn start` after building to run the application on localhost:4000 (default).
 
 ### Project Structure
 

@@ -2,25 +2,28 @@ import {Router} from 'express';
 
 import loginController from '../controllers/login';
 
-// Define express router.
+const route = '/login';
+/**
+ * @type {Router} Express router object.
+ */
 const loginRouter = new Router();
 
-// POST /login
-loginRouter.post('/login', loginController);
+// POST.
+loginRouter.post(route, loginController);
 
-const unsupportedMessage = '/login only supports POST with user credentials.';
-// DELETE /login. Unsupported
-loginRouter.delete('/login', (_, res) =>
+const unsupportedMessage = `${route} only supports POST with user credentials.`;
+// DELETE. Unsupported.
+loginRouter.delete(route, (_, res) =>
   res.status(405).json({message: unsupportedMessage}),
 );
 
-// GET /login. Unsupported
-loginRouter.get('/login', (_, res) =>
+// GET. Unsupported.
+loginRouter.get(route, (_, res) =>
   res.status(405).json({message: unsupportedMessage}),
 );
 
-// PUT /login. Unsupported
-loginRouter.put('/login', (_, res) =>
+// PUT. Unsupported.
+loginRouter.put(route, (_, res) =>
   res.status(405).json({message: unsupportedMessage}),
 );
 

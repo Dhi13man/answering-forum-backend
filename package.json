@@ -2,11 +2,12 @@
     "name": "stack-overflow-backend",
     "version": "1.0.0",
     "description": "A mock backend for Stack Overflow like messaging board created as a part of Swiggy i++",
-    "main": "./src/index.js",
+    "main": "./lib/index.js",
     "scripts": {
-        "test": "jest",
         "build": "babel src -d lib",
-        "start": "npm run build & node ./lib/index.js"
+        "start": "npm run build & node ./lib/index.js",
+        "test": "jest",
+        "watch": "nodemon --watch src --exec npm run start"
     },
     "keywords": [
         "nodejs",
@@ -23,11 +24,11 @@
         "@babel/core": "^7.16.7",
         "@babel/preset-env": "^7.16.7",
         "babel-jest": "^27.4.6",
+        "babel-preset-env": "^1.7.0",
         "eslint": "^8.6.0",
         "eslint-config-google": "^0.14.0",
         "jest": "^27.4.7",
-        "nodemon": "^2.0.15",
-        "regenerator-runtime": "^0.13.9"
+        "nodemon": "^2.0.15"
     },
     "dependencies": {
         "body-parser": "^1.19.1",

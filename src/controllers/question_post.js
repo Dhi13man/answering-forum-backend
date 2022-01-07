@@ -1,6 +1,6 @@
 import {QuestionInputModel} from '../models/question_data';
 import {createQuestion, getNextQuestionID} from '../repositories/questions';
-import {authValidatedUser} from './login';
+import {authValidatedUser} from './login_post';
 
 /**
  * Used by /question route to log in a user into the application by validating
