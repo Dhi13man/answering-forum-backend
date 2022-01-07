@@ -19,10 +19,10 @@ const usersDBPath = './src/database/users.json';
 export const createUser = async (userData, dbPathOverride=usersDBPath) => {
   const users = await getDatabase(dbPathOverride);
   if (userData.username.length === 0 || userData.password.length === 0) {
-    throw new Error('username and password are required.');
+    throw invalidUserCredentialsError();
   }
   if (users[userData.username]) {
-    throw new Error('User already exists.');
+    throw alreadyExistsError(userData.username);
   }
   users[userData.username] = userData.toJSON();
   fs.writeFile(dbPathOverride, JSON.stringify(users));
@@ -59,14 +59,14 @@ export const updateUser = async (
 ) => {
   const users = await getDatabase(dbPathOverride);
   if (username.length === 0) {
-    throw new Error('Username is required.');
+    throw invalidUserCredentialsError();
   }
   if (!users[username]) {
-    throw new Error(`User with username ${username} doesn't exist.`);
+    throw doesNotExistError(username);
   }
   users[username] = {
-    username: username,
     ...userData.toJSON(),
+    username: username,
   };
   fs.writeFile(dbPathOverride, JSON.stringify(users));
   return true;
@@ -78,9 +78,13 @@ export const updateUser = async (
  * @param {string} dbPathOverride - Override of the path to the
  * database to be used. Defaults to the default defined path usersDBPath.
  * @return {Promise<void>} A promise that resolves when the user is deleted.
+ * @throws {Error} If credentials are invalid or username doesn't already exist.
  */
 export const deleteUser = async (username, dbPathOverride=usersDBPath) => {
   const users = await getDatabase(dbPathOverride);
+  if (!users[username]) {
+    throw doesNotExistError(username);
+  }
   delete users[username];
   fs.writeFile(dbPathOverride, JSON.stringify(users));
 };
@@ -94,3 +98,29 @@ export const deleteUser = async (username, dbPathOverride=usersDBPath) => {
  */
 const getDatabase = async (dbPath=usersDBPath) =>
   JSON.parse(await fs.readFile(dbPath, 'utf-8'));
+
+/**
+ * Creates error that is thrown when User data is invalid.
+ * @return {Error} An error object for invalid User data.
+ */
+const invalidUserCredentialsError = () =>
+  new Error('username and password are required.');
+
+/**
+ * Creates error that is thrown when the User corresponding to the username
+ * already exists.
+ * @param {string} username - ID of the question that already exists.
+ * @return {Error} An error object for already existing Users.
+ */
+const alreadyExistsError = (username) =>
+  new Error(`User with username ${username} already exists.`);
+
+/**
+ * Creates error that is thrown when the User corresponding to the username
+ * does not exist.
+ * @param {string} username - ID of the question that does not exist.
+ * @return {Error} An error object for non-existing Users.
+ */
+const doesNotExistError = (username) =>
+  new Error(`User with username ${username} doesn't exist.`);
+

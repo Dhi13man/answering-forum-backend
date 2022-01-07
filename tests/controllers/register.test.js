@@ -3,6 +3,7 @@ import UserData from '../../src/models/user_data';
 import {getUser, deleteUser} from '../../src/repositories/users';
 
 describe('Register Controller Tests', () => {
+  // Dummy User data
   const dummyUserName = 'registertest@abc.com';
   const dummyUserPassword = 'asdasdasga';
   const dummyUserRegistrationName = 'registertest';
@@ -17,6 +18,7 @@ describe('Register Controller Tests', () => {
   const userPassInvalidMessage =
         'username and password longer than 4 characters are required.';
 
+  // Define tests
   it('Registers with valid credentials', async () => {
     const req = {
       body: {
@@ -137,7 +139,7 @@ describe('Register Controller Tests', () => {
     };
     await registerController(req, res2);
     expect(res2.json).toHaveBeenCalledWith({
-      message: 'User already exists.',
+      message: `User with username ${dummyUserName} already exists.`,
     });
     expect(res2.status).toHaveBeenCalledWith(500);
     // Ensure tests don't leave a user behind.

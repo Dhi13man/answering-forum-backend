@@ -1,6 +1,7 @@
 import loginController from '../../src/controllers/login';
 
 describe('Login Controller Tests', () => {
+  // Dummy User data
   const dummyUserName = 'logintest@abc.com';
   const dummyUserPassword = 'asdasdasga';
 
@@ -8,6 +9,7 @@ describe('Login Controller Tests', () => {
   const successLoginMessage = 'user logged in successfully';
   const userPassInvalidMessage = 'Sorry invalid credentials';
 
+  // Define tests
   it('Logs in with valid credentials', async () => {
     const req = {
       body: {
@@ -26,7 +28,7 @@ describe('Login Controller Tests', () => {
     expect(res.status).toHaveBeenCalledWith(201);
   });
 
-  test('Attempts login with no username.', async () => {
+  it('Attempts login with no username.', async () => {
     const req = {
       body: {
         password: dummyUserPassword,
@@ -43,7 +45,7 @@ describe('Login Controller Tests', () => {
     expect(res.status).toHaveBeenCalledWith(401);
   });
 
-  test('Attempts login with no password.', async () => {
+  it('Attempts login with no password.', async () => {
     const req = {
       body: {
         username: dummyUserName,
@@ -60,7 +62,7 @@ describe('Login Controller Tests', () => {
     expect(res.status).toHaveBeenCalledWith(401);
   });
 
-  test('Attempts login with invalid credentials', async () => {
+  it('Attempts login with invalid credentials', async () => {
     const req = {
       body: {
         username: dummyUserName,

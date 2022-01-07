@@ -50,8 +50,8 @@ export class QuestionInputModel {
    *   question-id (optional)
    */
   toJSON = () => ({
-    'user-details': this.user_details,
-    'question': this.question,
+    'user-details': this.user_details.toJSON(),
+    'question': this.question.toJSON(),
   });
 }
 
@@ -130,7 +130,7 @@ export class QuestionData {
    */
   static fromJSON = (json, questionID) => new QuestionData(
       json.title,
-      json.password,
+      json.body,
       json['question-id'] || json.questionID || questionID,
       json.username,
   );

@@ -41,7 +41,7 @@ const askQuestion = async (questionInput, res) => {
   if (created) {
     res.status(201).json({
       'message': 'Question posted successfully',
-      'question-id': questionInput.question_id,
+      'question-id': questionInput.question.question_id,
     });
   } else {
     throw new Error('Question could not be created, despite proper creds.');
