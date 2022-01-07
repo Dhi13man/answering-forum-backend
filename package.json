@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "scripts": {
         "test": "jest",
-        "build": "ls & babel src -d lib & node lib/index"
+        "build": "babel src -d lib & ls & node lib/index"
     },
     "keywords": [
         "nodejs",
