@@ -1,6 +1,7 @@
 import {Router} from 'express';
 
-import questionController from '../../../controllers/question_post';
+import questionPostController
+  from '../../../controllers/question_post';
 
 const route = '/answer';
 /**
@@ -9,7 +10,7 @@ const route = '/answer';
 const answerRouter = new Router({mergeParams: true});
 
 // POST.
-answerRouter.post(route, questionController);
+answerRouter.post(route, questionPostController);
 
 const unsupportedMessage =
   `${route} only supports POST with user and answer details.`;

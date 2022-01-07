@@ -1,6 +1,6 @@
-import {QuestionInputModel} from '../models/question_data';
-import {createQuestion, getNextQuestionID} from '../repositories/questions';
-import {authValidatedUser} from './login_post';
+import {QuestionInputModel} from '../../models/question_data';
+import {createQuestion, getNextQuestionID} from '../../repositories/questions';
+import {authValidatedUser} from '../login_post';
 
 /**
  * Used by /question route to log in a user into the application by validating
@@ -8,7 +8,7 @@ import {authValidatedUser} from './login_post';
  * @param {Express.Request} req - The request object.
  * @param {Express.Response} res - The response object.
  */
-const questionController = async (req, res) => {
+const questionPostController = async (req, res) => {
   const questionInput = QuestionInputModel.fromJSON(
       req.body,
       await getNextQuestionID(),
@@ -28,7 +28,7 @@ const questionController = async (req, res) => {
   }
 };
 
-export default questionController;
+export default questionPostController;
 
 /**
  * Asks a Question by using createQuestion from the questions repository.

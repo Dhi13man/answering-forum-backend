@@ -1,6 +1,7 @@
 import {Router} from 'express';
 
-import questionController from '../../controllers/question';
+import questionPostController
+  from '../../controllers/question/question_post';
 import questionIDRouter from './questionID';
 
 const route = '/question';
@@ -13,7 +14,7 @@ const questionRouter = new Router();
 questionRouter.use(route, questionIDRouter);
 
 // POST.
-questionRouter.post(route, questionController);
+questionRouter.post(route, questionPostController);
 
 const unsupportedMessage =
   `${route} only supports POST with user and question details.`;

@@ -8,7 +8,7 @@ import {validateEmail, validatePassword} from '../utils/validators';
  * @param {Express.Request} req - The request object.
  * @param {Express.Response} res - The response object.
  */
-const registerController = async (req, res) => {
+const registerPostController = async (req, res) => {
   const userData = UserData.fromJSON(req.body);
   try {
     if (validateCreds(userData, res)) {
@@ -20,7 +20,7 @@ const registerController = async (req, res) => {
   }
 };
 
-export default registerController;
+export default registerPostController;
 
 /**
  * Utility function to validate the credentialas associated with the request.

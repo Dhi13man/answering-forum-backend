@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-import registerController from '../controllers/register';
+import registerPostController from '../controllers/register_post';
 
 const route = '/register';
 /**
@@ -9,7 +9,7 @@ const route = '/register';
 const registerRouter = new Router();
 
 // POST.
-registerRouter.post(route, registerController);
+registerRouter.post(route, registerPostController);
 
 const unsupportedMessage = `${route} only supports POST with user data.`;
 // DELETE. Unsupported.

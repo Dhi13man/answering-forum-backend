@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-import loginController from '../controllers/login';
+import loginPostController from '../controllers/login_post';
 
 const route = '/login';
 /**
@@ -9,7 +9,7 @@ const route = '/login';
 const loginRouter = new Router();
 
 // POST.
-loginRouter.post(route, loginController);
+loginRouter.post(route, loginPostController);
 
 const unsupportedMessage = `${route} only supports POST with user credentials.`;
 // DELETE. Unsupported.

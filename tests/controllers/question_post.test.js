@@ -1,4 +1,5 @@
-import questionController from '../../src/controllers/question_post';
+import questionPostController
+  from '../../src/controllers/question/question_post';
 import {QuestionInputModel} from '../../src/models/question_data';
 import {
   getNextQuestionID,
@@ -35,7 +36,7 @@ describe('Question Controller Tests', () => {
       json: jest.fn().mockReturnThis(),
     };
     const qid = await getNextQuestionID();
-    await questionController(req, res);
+    await questionPostController(req, res);
     expect(res.json).toHaveBeenCalledWith({
       'message': successQuestionMessage,
       'question-id': qid,
@@ -59,7 +60,7 @@ describe('Question Controller Tests', () => {
       status: jest.fn().mockReturnThis(),
       json: jest.fn().mockReturnThis(),
     };
-    await questionController(req, res);
+    await questionPostController(req, res);
     expect(res.json).toHaveBeenCalledWith({
       message: userPassInvalidMessage,
     });
@@ -74,7 +75,7 @@ describe('Question Controller Tests', () => {
       status: jest.fn().mockReturnThis(),
       json: jest.fn().mockReturnThis(),
     };
-    await questionController(req, res);
+    await questionPostController(req, res);
     expect(res.json).toHaveBeenCalledWith({
       message: userPassInvalidMessage,
     });
@@ -89,7 +90,7 @@ describe('Question Controller Tests', () => {
       status: jest.fn().mockReturnThis(),
       json: jest.fn().mockReturnThis(),
     };
-    await questionController(req, res);
+    await questionPostController(req, res);
     expect(res.json).toHaveBeenCalledWith({
       message: userPassInvalidMessage,
     });

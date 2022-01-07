@@ -7,7 +7,7 @@ import {validateEmail, validatePassword} from '../utils/validators';
  * @param {Express.Request} req - The request object.
  * @param {Express.Response} res - The response object.
  */
-const loginController = async (req, res) => {
+const loginPostController = async (req, res) => {
   const {username, password} = req.body;
   try {
     const val = validateUser(username, password);
@@ -23,7 +23,7 @@ const loginController = async (req, res) => {
   }
 };
 
-export default loginController;
+export default loginPostController;
 
 /**
  * Method that validates whether given username, password exists in database.
