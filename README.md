@@ -19,7 +19,7 @@ A Node.js Express backend for a Stackoverflow like answering forum, with RESTful
 
 ## Setup
 
-1. Install [NodeJs](https://nodejs.org/en/) and [npm](https://www.npmjs.com/).
+1. Install [NodeJS](https://nodejs.org/en/) and any NodeJS package manager.
     - [npm](https://www.npmjs.com/)
     - [yarn](https://yarnpkg.com/)
 
