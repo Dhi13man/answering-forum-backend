@@ -5,7 +5,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/dhi13man/answering-forum-backend?style=social)](https://github.com/Dhi13man/answering-forum-backend/network/members)
 [![GitHub Repo stars](https://img.shields.io/github/stars/dhi13man/answering-forum-backend?style=social)](https://github.com/Dhi13man/answering-forum-backend/stargazers)
 [![Last Commit](https://img.shields.io/github/last-commit/dhi13man/answering-forum-backend)](https://github.com/Dhi13man/answering-forum-backend/commits/main)
-[![Build, Format, Test](https://github.com/Dhi13man/answering-forum-backend/workflows/Build,%20Format,%20Test/badge.svg)](https://github.com/Dhi13man/answering-forum-backend/actions)
+[![Node.js CI](https://github.com/Dhi13man/answering-forum-backend/workflows/Node.js%20CI/badge.svg)](https://github.com/Dhi13man/answering-forum-backend/actions)
 
 A Node.js Express backend for a Stackoverflow like answering forum, with RESTful endpoints, written in es6 style with linted and comprehensively unit-tested code. Utilizes a local json database using fs but has full separation of concern to implement anything else.
 
