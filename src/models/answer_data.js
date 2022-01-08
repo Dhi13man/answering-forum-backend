@@ -1,53 +1,58 @@
 /**
  * Data Class for the Answer's full data stored in the database.
  * @class
- * @property {QuestionData} answer - The data of the answer.
- * @property {QuestionUser} user_details - Data of the user sending the answer.
+ * @property {AnswerData} answer - The data of the answer.
+ * @property {AnswerUser} user_details - Data of the user sending the answer.
  */
 export class AnswerInputModel {
   /**
-   * Constructor for the QuestionModel.
+   * Constructor for the AnswerModel.
    * @param {string} username - The username of the user sending the answer.
    * @param {string} password - The password of the user sending the answer.
-   * @param {string} title - The title of the answer.
-   * @param {string} body - The body of the answer.
-   * @param {number} questionID - The id of the answer (optional)
+   * @param {string} answerText - The text of the answer.
+   * @param {string} questionID - The id of the question the answer belongs
+   * to. (optional)
    */
-  constructor(username, password, title, body, questionID) {
+  constructor(username, password, answerText, questionID) {
     this.user_details = new AnswerUser(username, password);
-    this.answer = new AnswerData(title, body, questionID, username);
+    this.answer = new AnswerData(answerText, questionID, username);
   }
 
   /**
    * Utility method to create an UserData model from a json object.
    * @param {object} json - The json object to be converted. Should have keys:
-   * - user-details (or user_details) - The details of the user sending the
-   *   answer. Further has keys: username, password.
-   * - answer - The data of the answer. Further has keys: title, body,
-   *   question-id (optional)
-   * @param {number} questionID - The id of the question this answer is for.
-   *  Priority is given to the id in the json object if both are given.
-   * @return {AnswerInputModel} object of the QuestionModel.
+   *  * user-details (or user_details) - The details of the user sending the
+   answer. Should further have keys:
+   *    - username - The username of the user asking the question.
+   *    - password - The password of the user asking the question.
+   *  * answer - The data of the answer. Should further have keys:
+   *    - answer - The actual text of the answer.
+   *    - question-id (or question_id) - The id of question that answer belongs.
+   *    - username - The username of the user sending the answer.
+   * @return {AnswerInputModel} object of the AnswerModel.
    */
-  static fromJSON = (json, questionID) => {
-    const userDetails = json['user-details'] || json.user_details || {};
-    const answer = json.answer || {};
+  static fromJSON = (json) => {
+    const userDetails = json['user-details'] || json.user_details;
+    const answer = json.answer;
     return new AnswerInputModel(
         userDetails.username,
         userDetails.password,
-        answer.title,
-        answer.body,
-        answer['question-id'] || answer.question_id || questionID,
+        answer.answer,
+        answer['question-id'] || answer.question_id,
     );
   };
 
   /**
    * Utility method to convert the user data to a json object.
    * @return {object} Json object of the user data. Has keys:
-   * - user-details - The details of the user sending the answer.
-   * Further has keys: username, password.
-   * - answer - The data of the answer. Further has keys: title, body,
-   *   question-id (optional)
+   * * user-details (or user_details) - The details of the user sending the
+   *   answer. Should further have keys:
+   *    - username - The username of the user asking the question.
+   *    - password - The password of the user asking the question.
+   * * answer - The data of the answer. Should further have keys:
+   *    - answer - The actual text of the answer.
+   *    - question-id (optional) - The id of the question the answer belongs to.
+   *    - username - The username of the user sending the answer.
    */
   toJSON = () => ({
     'user-details': this.user_details.toJSON(),
@@ -63,7 +68,7 @@ export class AnswerInputModel {
  */
 export class AnswerUser {
   /**
-   * Constructor for the QuestionUser model.
+   * Constructor for the AnswerUser model.
    * @param {string} username - The username of the user sending the answer.
    * @param {string} password - The password of the user sending the answer.
    */
@@ -77,7 +82,7 @@ export class AnswerUser {
    * @param {object} json - The json object to be converted. Should have keys:
    * - username - The username of the user sending the answer.
    * - password - The password of the user sending the answer.
-   * @return {AnswerUser} object of the QuestionUser.
+   * @return {AnswerUser} object of the AnswerUser.
    */
   static fromJSON = (json) => new AnswerUser(json.username, json.password);
 
@@ -102,7 +107,7 @@ export class AnswerUser {
  */
 export class AnswerData {
   /**
-   * Constructor for the QuestionData model.
+   * Constructor for the AnswerData model.
    * @param {string} answer - The text of the answer.
    * @param {number} questionID - The id of the question it belongs to.
    * @param {string} username - The username of the user sending the answer.
@@ -122,7 +127,7 @@ export class AnswerData {
    * - username - The username of the user sending the answer.
    * @param {number} questionID - The id of the question that the answer belongs
    * to. Priority is given to the id in the json object if both are given.
-   * @return {AnswerData} object of the QuestionData.
+   * @return {AnswerData} object of the AnswerData.
    */
   static fromJSON = (json, questionID) =>
     new AnswerData(

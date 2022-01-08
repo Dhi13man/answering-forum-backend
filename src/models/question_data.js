@@ -21,11 +21,16 @@ export class QuestionInputModel {
   /**
    * Utility method to create an UserData model from a json object.
    * @param {object} json - The json object to be converted. Should have keys:
-   * - user-details (or user_details) - The details of the user asking the
-   *   question. Further has keys: username, password.
-   * - question - The data of the question. Further has keys: title, body,
-   *   question-id (optional)
-   * @param {number} questionID - The id of the question. Priority is given
+   * * user-details (or user_details) - The details of the user asking the
+   *   question. Should further have keys:
+   *    - username - The username of the user asking the question.
+   *    - password - The password of the user asking the question.
+   * * question - The data of the question. Should further have keys:
+   *    - title - The title of the question.
+   *    - body - The body of the question.
+   *    - question-id (or question_id) - The ID of the question.
+   *    - username - The username of the user asking the question.
+   * @param {number} questionID - The ID of the question. Priority is given
    * to the id in the json object if both are given.
    * @return {QuestionInputModel} object of the QuestionModel.
    */
@@ -44,10 +49,14 @@ export class QuestionInputModel {
   /**
    * Utility method to convert the user data to a json object.
    * @return {object} Json object of the user data. Has keys:
-   * - user-details - The details of the user asking the question. Further has
-   *  keys: username, password.
-   * - question - The data of the question. Further has keys: title, body,
-   *   question-id (optional)
+   * * user-details - The details of user asking the question. Further has keys:
+   *    - username - The username of the user asking the question.
+   *    - password - The password of the user asking the question.
+   * * question - The data of the question. Further has keys:
+   *    - title - The title of the question.
+   *    - body - The body of the question.
+   *    - question-id (optional) - The ID of the question.
+   *    - username - The username of the user asking the question.
    */
   toJSON = () => ({
     'user-details': this.user_details.toJSON(),
@@ -124,7 +133,8 @@ export class QuestionData {
    * @param {object} json - The json object to be converted. Should have keys:
    * - title - The title of the question.
    * - body - The body of the question.
-   * - question-id (or question_id) - The id of the question (optional).
+   * - question-id (or question_id) - The id of the question (optional). Always
+   *   parsed to number for consistency. Throws error if not a number.
    * @param {number} questionID - The id of the question. Priority is given
    * to the id in the json object if both are given.
    * @return {QuestionData} object of the QuestionData.
@@ -132,7 +142,7 @@ export class QuestionData {
   static fromJSON = (json, questionID) => new QuestionData(
       json.title,
       json.body,
-      json['question-id'] || json.questionID || questionID,
+      Number(json['question-id'] || json.questionID || questionID),
       json.username,
   );
 
@@ -141,12 +151,13 @@ export class QuestionData {
    * @return {object} Json object of the user data. Has keys:
    * - title - The title of the question.
    * - body - The body of the question.
-   * - question-id - The id of the question (optional).
+   * - question-id - The id of the question (optional). Always returned
+   * as string for convenience but is numeric.
    */
   toJSON = () => ({
     'title': this.title,
     'body': this.body,
-    'question-id': this.question_id,
+    'question-id': this.question_id ? this.question_id.toString() : undefined,
     'username': this.username,
   });
 }

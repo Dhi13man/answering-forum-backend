@@ -42,7 +42,11 @@ The project's code structure loosely follows MVC model while maintaing complete 
   - src
     - controllers
       - login.js
-      - question.js
+      - answers
+        - answer_post.js
+      - questions
+        - question_get.js
+        - question_post.js
       - register.js
     - database
       - questions.json
@@ -55,7 +59,11 @@ The project's code structure loosely follows MVC model while maintaing complete 
       - users.js
     - routes
       - login.js
-      - question.js
+      - question
+        - questionID
+          - answer.js
+          - index.js
+        - index.js
       - register.js
     - utils
       - validators.js

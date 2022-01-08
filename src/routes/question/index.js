@@ -1,7 +1,7 @@
 import {Router} from 'express';
 
 import questionPostController
-  from '../../controllers/question/question_post';
+  from '../../controllers/questions/question_post';
 import questionIDRouter from './questionID';
 
 const route = '/question';

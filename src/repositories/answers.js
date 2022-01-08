@@ -19,7 +19,7 @@ const answersDBPath = './src/database/answers.json';
  */
 export const createAnswer = async (answer, dbPathOverride=answersDBPath) => {
   const answers = await getDatabase(dbPathOverride);
-  if (answer.title.length === 0 || !answer.question_id) {
+  if (answer.answer.length === 0 || !answer.question_id) {
     throw invalidAnswerError();
   }
   const aID = getAnswerID(answer.username, answer.question_id);
@@ -77,7 +77,7 @@ export const getAllAnswersForQuestion = async (questionID) => {
  */
 export const updateAnswer = async (answer, dbPathOverride=answersDBPath) => {
   const answers = await getDatabase(dbPathOverride);
-  if (answer.title.length === 0) {
+  if (answer.answer.length === 0) {
     throw invalidAnswerError();
   }
   const aID = getAnswerID(answer.username, answer.question_id);
@@ -137,7 +137,7 @@ const getDatabase = async (dbPath=answersDBPath) =>
  * @return {Error} An error object for invalid answers.
  */
 const invalidAnswerError = () =>
-  new Error('Answer must have a title and should have generated an ID.');
+  new Error('Answer must have answer text and question ID must be provided.');
 
 /**
  * Creates error that is thrown when the answer corresponding to the ID.

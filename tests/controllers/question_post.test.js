@@ -1,5 +1,5 @@
 import questionPostController
-  from '../../src/controllers/question/question_post';
+  from '../../src/controllers/questions/question_post';
 import {QuestionInputModel} from '../../src/models/question_data';
 import {
   getNextQuestionID,
@@ -25,7 +25,7 @@ describe('Question Controller Tests', () => {
   });
 
   // Response messages
-  const successQuestionMessage = 'Question posted successfully';
+  const successQuestionMessage = 'Question posted successfully.';
   const userPassInvalidMessage = 'Invalid credentials. Cannot ask question.';
 
   // Define tests
@@ -46,7 +46,7 @@ describe('Question Controller Tests', () => {
     const question = await getQuestion(qid);
     expect(question.toJSON()).toStrictEqual({
       ...dummyQuestionInput.question.toJSON(),
-      'question-id': qid,
+      'question-id': qid.toString(),
     });
     // To ensure failed tests don't leave a user behind.
     await deleteQuestion(qid);
