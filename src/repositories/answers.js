@@ -54,11 +54,16 @@ export const getAnswer = async (
 /**
  * Gets all answers posted for the question identified by the given ID.
  * @param {string} questionID - The ID of the question to get answers for.
+ * @param {string} dbPathOverride - Override of the path to the database
+ * to be used. Defaults to the default defined path answersDBPath.
  * @return {Promise<AnswerData[]>} A promise that resolves to an array of
  * answer data objects for the question.
  */
-export const getAllAnswersForQuestion = async (questionID) => {
-  const answers = await getDatabase(answersDBPath);
+export const getAllAnswersForQuestion = async (
+    questionID,
+    dbPathOverride=answersDBPath,
+) => {
+  const answers = await getDatabase(dbPathOverride);
   const answerIDs = Object.keys(answers).filter(
       (answerID) => answerID.split(':')[0] === questionID,
   );
@@ -68,7 +73,7 @@ export const getAllAnswersForQuestion = async (questionID) => {
 /**
  * Update an existing answer in the database.
  * @param {AnswerData} answer - The data of the answer to be updated.
- * answer.question_id is ignored
+ * answer. question_id is ignored
  * @param {string} dbPathOverride - Override of the path to the
  * database to be used. Defaults to the default defined path answersDBPath.
  * @return {Promise<boolean>} A promise that resolves to whether the

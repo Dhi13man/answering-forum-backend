@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import questionGetIDController
+import {questionGetIDController}
   from '../../../controllers/questions/question_get';
 
 import questionPostController

@@ -49,8 +49,8 @@ export const createQuestion = async (
  * Fetch a question from the database.
  * @param {string} questionID - The input data of the
  * question to be created.
- * @param {string} dbPathOverride - Override of the path to the
- * database to be used. Defaults to the default defined path questionsDBPath.
+ * @param {string} dbPathOverride - Override of the path to the database
+ * to be used. Defaults to the default defined path questionsDBPath.
  * @return {Promise<QuestionData>} A promise that resolves to the question data.
  */
 export const getQuestion = async (
@@ -61,6 +61,26 @@ export const getQuestion = async (
   const qdJSON = questions[questionID];
   return qdJSON ? QuestionData.fromJSON(qdJSON) : undefined;
 };
+
+/**
+ * Gets all questions posted by an user identified by the given usernmae.
+ * @param {string} username - The username of the user whose questions we need.
+ * @param {string} dbPathOverride - Override of the path to the database
+ * to be used. Defaults to the default defined path questionsDBPath.
+ * @return {Promise<QuestionData[]>} A promise that resolves to an array of
+ * question data objects for the question.
+ */
+export const getAllQuestionsForUsername = async (
+    username,
+    dbPathOverride=questionsDBPath,
+) => {
+  const questions = await getDatabase(dbPathOverride);
+  const filteredQuestions = Object.values(questions).filter(
+      (question) => question.username === username,
+  );
+  return filteredQuestions.map((question) => QuestionData.fromJSON(question));
+};
+
 
 /**
  * Update an existing question in the database.
