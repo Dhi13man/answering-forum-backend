@@ -74,7 +74,7 @@ describe('Answers repository Tests', () => {
         );
         expect(updated).toBe(true);
         const answer = await getAnswer(dummyQID, dummyUName, dummyDatabasePath);
-        expect(answer.toJSON()).toStrictEqual(updatedDummyAnswer.toJSON());
+        expect(answer.answer).toStrictEqual(updatedDummyAnswer.answer);
       },
   );
 

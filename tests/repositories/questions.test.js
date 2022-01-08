@@ -1,6 +1,11 @@
 import {QuestionData} from '../../src/models/question_data';
 import {
-  createQuestion, deleteQuestion, getQuestion, updateQuestion,
+  createQuestion,
+  deleteQuestion,
+  getQuestion,
+  updateQuestion,
+  getAllQuestionsForUsername,
+  getNextQuestionID,
 } from '../../src/repositories/questions';
 
 describe('Questions repository Tests', () => {
@@ -11,10 +16,12 @@ describe('Questions repository Tests', () => {
   const dummyID = '-1';
   const dummyTitle = 'dummyTitle';
   const dummyBody = 'dummyBody';
+  const dummyUserName = 'dummy@UserName.com';
   const dummyQuestion = QuestionData.fromJSON({
     title: dummyTitle,
     body: dummyBody,
     questionID: dummyID,
+    username: dummyUserName,
   });
 
   // Dummy Updated Question Data
@@ -35,6 +42,10 @@ describe('Questions repository Tests', () => {
         'Question must have a title and should have generated an ID.';
 
   // Define tests
+  test('getNextQuestionID should return 1.', async () => {
+    expect(await getNextQuestionID(dummyDatabasePath)).toBe(1);
+  });
+
   test('Create a dummy question.', async () => {
     const created = await createQuestion(dummyQuestion, dummyDatabasePath);
     expect(created).toBe(true);
@@ -62,6 +73,14 @@ describe('Questions repository Tests', () => {
     expect(question.toJSON()).toStrictEqual(dummyQuestion.toJSON());
   });
 
+  test('Get all questions for dummy user before deletion.', async () => {
+    const questions = await getAllQuestionsForUsername(
+        dummyUserName, dummyDatabasePath,
+    );
+    expect(questions.length).toBe(1);
+    expect(questions[0].toJSON()).toStrictEqual(dummyQuestion.toJSON());
+  });
+
   test(
       'Update the dummy question and validate it\'s updated data.',
       async () => {
@@ -72,14 +91,26 @@ describe('Questions repository Tests', () => {
         );
         expect(updated).toBe(true);
         const question = await getQuestion(dummyID, dummyDatabasePath);
-        expect(question.toJSON()).toStrictEqual(updatedDummyQuestion.toJSON());
+        expect(question.title).toStrictEqual(updatedDummyQuestion.title);
+        expect(question.body).toStrictEqual(updatedDummyQuestion.body);
       },
   );
+
+  test('getNextQuestionID should return 2.', async () => {
+    expect(await getNextQuestionID(dummyDatabasePath)).toBe(2);
+  });
 
   test('Delete the dummy question.', async () => {
     await deleteQuestion(dummyID, dummyDatabasePath);
     const user = await getQuestion(dummyID, dummyDatabasePath);
     expect(user).toBe(undefined);
+  });
+
+  test('Get all questions for dummy user after deletion.', async () => {
+    const questions = await getAllQuestionsForUsername(
+        dummyUserName, dummyDatabasePath,
+    );
+    expect(questions.length).toBe(0);
   });
 
   test('Attempt to update a non-existent question.', async () => {

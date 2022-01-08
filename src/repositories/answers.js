@@ -54,7 +54,7 @@ export const getAnswer = async (
 /**
  * Update an existing answer in the database.
  * @param {AnswerData} answer - The data of the answer to be updated.
- * answer. question_id is ignored
+ * answer.question_id and answer.username is ignored and CAN NOT be updated.
  * @param {string} dbPathOverride - Override of the path to the
  * database to be used. Defaults to the default defined path answersDBPath.
  * @return {Promise<boolean>} A promise that resolves to whether the
@@ -70,9 +70,15 @@ export const updateAnswer = async (answer, dbPathOverride=answersDBPath) => {
   if (!answers[aID]) {
     throw doesNotExistError(answer.question_id, answer.username);
   }
+  // Remove undefined properties from quesiton.
+  const obj = answer.toJSON();
+  Object.keys(obj).forEach((key) => obj[key] === undefined && delete obj[key]);
+  // Update the new data.
   answers[aID] = {
-    ...answer.toJSON(),
-    'question-ID': answers[aID]['question-id'],
+    ...answers[aID],
+    ...obj,
+    'question-id': answers[aID]['question-id'],
+    'username': answers[aID].username,
   };
   fs.writeFile(dbPathOverride, JSON.stringify(answers));
   return true;

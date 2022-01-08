@@ -64,8 +64,13 @@ export const updateUser = async (
   if (!users[username]) {
     throw doesNotExistError(username);
   }
+  // Remove undefined properties from quesiton.
+  const obj = userData.toJSON();
+  Object.keys(obj).forEach((key) => obj[key] === undefined && delete obj[key]);
+  // Update the new data.
   users[username] = {
-    ...userData.toJSON(),
+    ...users[username],
+    ...obj,
     username: username,
   };
   fs.writeFile(dbPathOverride, JSON.stringify(users));
