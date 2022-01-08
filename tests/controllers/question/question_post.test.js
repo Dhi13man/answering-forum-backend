@@ -1,11 +1,11 @@
 import questionPostController
-  from '../../src/controllers/question/question_post';
-import {QuestionInputModel} from '../../src/models/question_data';
+  from '../../../src/controllers/question/question_post';
+import {QuestionInputModel} from '../../../src/models/question_data';
 import {
   getNextQuestionID,
   getQuestion,
   deleteQuestion,
-} from '../../src/repositories/questions';
+} from '../../../src/repositories/questions';
 
 describe('Question Controller Tests', () => {
   // Dummy Question Input Data

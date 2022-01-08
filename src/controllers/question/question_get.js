@@ -1,4 +1,3 @@
-import {QuestionUser} from '../../models/question_data';
 import {getAllAnswersForQuestion} from '../../repositories/answers';
 import {
   getAllQuestionsForUsername, getQuestion,
@@ -13,8 +12,8 @@ import {authValidatedUser} from '../login_post';
  * @param {Express.Response} res - The response object.
  */
 export const questionGetIDController = async (req, res) => {
-  const questionID = req.params.qID;
   try {
+    const questionID = req.params.qID;
     const question = await getQuestion(questionID);
     const answers = await getAllAnswersForQuestion(questionID);
     if (question) {
@@ -41,11 +40,10 @@ export const questionGetIDController = async (req, res) => {
  * @param {Express.Response} res - The response object.
  */
 export const questionGetUsernameController = async (req, res) => {
-  const user = QuestionUser.fromJSON(req.body);
   try {
-    const authVal = await authValidatedUser(user.username, user.password);
-    const questions = await getAllQuestionsForUsername(user.username);
-    if (authVal) {
+    const user = req.body;
+    if (user && await authValidatedUser(user.username, user.password)) {
+      const questions = await getAllQuestionsForUsername(user.username);
       const responseData = await buildQuestionAnswerData(questions);
       res.status(200).json(responseData);
     } else {
