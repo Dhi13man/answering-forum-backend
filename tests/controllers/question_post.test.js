@@ -1,5 +1,5 @@
 import questionPostController
-  from '../../src/controllers/questions/question_post';
+  from '../../src/controllers/question/question_post';
 import {QuestionInputModel} from '../../src/models/question_data';
 import {
   getNextQuestionID,
