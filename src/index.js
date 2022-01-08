@@ -1,10 +1,13 @@
-import express from 'express';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import express from 'express';
 import logger from 'morgan';
 
 import loginRouter from './routes/login';
 import registerRouter from './routes/register';
 import questionRouter from './routes/question';
+
+dotenv.config();
 
 // Define express app.
 const app = express();

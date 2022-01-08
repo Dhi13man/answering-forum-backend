@@ -22,9 +22,6 @@ describe('Login POST Controller Tests', () => {
       json: jest.fn().mockReturnThis(),
     };
     await loginController(req, res);
-    expect(res.json).toHaveBeenCalledWith({
-      message: successLoginMessage,
-    });
     expect(res.status).toHaveBeenCalledWith(201);
   });
 

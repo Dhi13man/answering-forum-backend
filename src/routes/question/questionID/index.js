@@ -1,9 +1,9 @@
 import {Router} from 'express';
 import {questionGetIDController}
-  from '../../../controllers/questions/question_get';
+  from '../../../controllers/question/question_get';
 
 import questionPostController
-  from '../../../controllers/questions/question_post';
+  from '../../../controllers/question/question_post';
 import answerRouter from './answer';
 
 const route = '/:qID';

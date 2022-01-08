@@ -19,8 +19,11 @@ const questionPostController = async (req, res) => {
       await getNextQuestionID(),
   );
   try {
-    const user = questionInput.user_details;
-    if (await authValidatedUser(user.username, user.password)) {
+    const user = questionInput.user_details || {};
+    const authVal = await authValidatedUser(
+        user.username, user.password, req.headers,
+    );
+    if (authVal) {
       await askQuestion(questionInput.question, res);
     } else {
       res.status(401).json({

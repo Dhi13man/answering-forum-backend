@@ -1,10 +1,10 @@
 import {Router} from 'express';
 import {
   questionGetUsernameController,
-} from '../../controllers/questions/question_get';
+} from '../../controllers/question/question_get';
 
 import questionPostController
-  from '../../controllers/questions/question_post';
+  from '../../controllers/question/question_post';
 import questionIDRouter from './questionID';
 
 const route = '/question';
@@ -19,7 +19,7 @@ questionRouter.use(route, questionIDRouter);
 // POST.
 questionRouter.post(route, questionPostController);
 
-// GET. Unsupported.
+// GET.
 questionRouter.get(route, questionGetUsernameController);
 
 const unsupportedMessage =

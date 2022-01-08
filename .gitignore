@@ -4,6 +4,9 @@ node_modules/
 # Babel will generate this.
 lib/
 
+# Environment Variables/Secrets
+.env
+
 # You can have different VSCode settings.
 .vscode/formatter.json
 .vscode/launch.json

@@ -41,8 +41,11 @@ export const questionGetIDController = async (req, res) => {
  */
 export const questionGetUsernameController = async (req, res) => {
   try {
-    const user = req.body;
-    if (user && await authValidatedUser(user.username, user.password)) {
+    const user = req.body || {};
+    const authVal = await authValidatedUser(
+        user.username, user.password, req.headers,
+    );
+    if (authVal) {
       const questions = await getAllQuestionsForUsername(user.username);
       const responseData = await buildQuestionAnswerData(questions);
       res.status(200).json(responseData);

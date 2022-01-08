@@ -25,7 +25,9 @@ const answerPostController = async (req, res, method='POST') => {
   answerInput.answer.question_id = questionID;
   try {
     const user = answerInput.user_details;
-    const authVal = await authValidatedUser(user.username, user.password);
+    const authVal = await authValidatedUser(
+        user.username, user.password, req.headers,
+    );
     await validateAndPOST(method, authVal, answerInput.answer, res);
     await validateAndPUT(
         method, questionID, user, authVal, answerInput.answer, res,
