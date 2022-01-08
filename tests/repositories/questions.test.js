@@ -1,9 +1,6 @@
-import {QuestionData} from '../../src/models/question_data.js';
+import {QuestionData} from '../../src/models/question_data';
 import {
-  createQuestion,
-  deleteQuestion,
-  getQuestion,
-  updateQuestion,
+  createQuestion, deleteQuestion, getQuestion, updateQuestion,
 } from '../../src/repositories/questions';
 
 describe('Questions repository Tests', () => {
@@ -11,7 +8,7 @@ describe('Questions repository Tests', () => {
   const dummyDatabasePath = 'tests/database/questions.test.json';
 
   // Dummy Question Data
-  const dummyID = -1;
+  const dummyID = '-1';
   const dummyTitle = 'dummyTitle';
   const dummyBody = 'dummyBody';
   const dummyQuestion = QuestionData.fromJSON({

@@ -1,10 +1,7 @@
-import UserData from '../../src/models/user_data.js';
+import UserData from '../../src/models/user_data';
 import {
-  getUser,
-  createUser,
-  deleteUser,
-  updateUser,
-} from '../../src/repositories/users.js';
+  getUser, createUser, deleteUser, updateUser,
+} from '../../src/repositories/users';
 
 describe('Users repository Tests', () => {
   // Database Override for tests
