@@ -13,14 +13,14 @@ import {authValidatedUser} from '../login_post';
  * @param {Express.Response} res - The response object.
  * @param {string} method - The HTTP method of the request.
  */
-const answerPostController = async (req, res, method) => {
-  // First and foremost there must be an answer to post.
-  if (!req.body.answer) {
-    res.status(400).json({message: 'Answer cannot be empty.'});
+const answerPostController = async (req, res, method='POST') => {
+  const answer = req.body.answer;
+  const questionID = req.params.qID;
+  if (!validateAnswerInput(answer, questionID)) {
+    res.status(400)
+        .json({message: 'Answer text and question ID cannot be empty.'});
     return;
   }
-
-  const questionID = req.params.qID;
   const answerInput = AnswerInputModel.fromJSON(req.body);
   answerInput.answer.question_id = questionID;
   try {
@@ -122,4 +122,13 @@ const putAnswer = async (answer, res) => {
     throw new Error('Answer could not be updated, despite proper creds.');
   }
 };
+
+/**
+ * Validate the answer input sent in the request
+ * @param {string} answer - The answer text.
+ * @param {string} questionID - The ID of the question associated.
+ * @return {boolean} - Whether the answer input is valid.
+ */
+const validateAnswerInput = (answer, questionID) =>
+  answer && questionID && String(answer.answer).length > 0;
 

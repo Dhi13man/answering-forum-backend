@@ -4,7 +4,7 @@ import {QuestionData} from '../../../src/models/question_data';
 import {createQuestion, deleteQuestion}
   from '../../../src/repositories/questions';
 
-describe('Question Controller Tests', () => {
+describe('Question GET Controller Tests', () => {
   // Dummy User for auth.
   const userName = 'logintest@abc.com';
   const userPassword = 'asdasdasga';

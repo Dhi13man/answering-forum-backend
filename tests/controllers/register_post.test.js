@@ -2,7 +2,7 @@ import registerController from '../../src/controllers/register_post';
 import UserData from '../../src/models/user_data';
 import {getUser, deleteUser} from '../../src/repositories/users';
 
-describe('Register Controller Tests', () => {
+describe('Register POST/PUT Controller Tests', () => {
   // Dummy User data
   const dummyUserName = 'registertest@abc.com';
   const dummyUserPassword = 'asdasdasga';

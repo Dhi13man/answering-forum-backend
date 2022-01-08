@@ -1,6 +1,6 @@
 import loginController from '../../src/controllers/login_post';
 
-describe('Login Controller Tests', () => {
+describe('Login POST Controller Tests', () => {
   // Dummy User data
   const dummyUserName = 'logintest@abc.com';
   const dummyUserPassword = 'asdasdasga';

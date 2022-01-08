@@ -7,7 +7,7 @@ import {
   deleteQuestion,
 } from '../../../src/repositories/questions';
 
-describe('Question Controller Tests', () => {
+describe('Question POST/PUT Controller Tests', () => {
   // Dummy Question Input Data
   const userName = 'logintest@abc.com';
   const userPassword = 'asdasdasga';
@@ -27,9 +27,10 @@ describe('Question Controller Tests', () => {
   // Response messages
   const successQuestionMessage = 'Question posted successfully.';
   const userPassInvalidMessage = 'Invalid credentials. Cannot ask question.';
+  const questionEmptyMessage = 'Question and its title cannot be empty.';
 
   // Define tests
-  it('Asks Question with valid credentials', async () => {
+  it('Asks Question with valid credentials.', async () => {
     const req = {body: dummyQuestionInput.toJSON()};
     const res = {
       status: jest.fn().mockReturnThis(),
@@ -82,7 +83,7 @@ describe('Question Controller Tests', () => {
     expect(res.status).toHaveBeenCalledWith(401);
   });
 
-  it('Attempts asking question with invalid credentials', async () => {
+  it('Attempts asking question with invalid credentials.', async () => {
     const inv = dummyQuestionInput.toJSON();
     inv['user-details'].password = '';
     const req = {body: inv};
@@ -95,6 +96,21 @@ describe('Question Controller Tests', () => {
       message: userPassInvalidMessage,
     });
     expect(res.status).toHaveBeenCalledWith(401);
+  });
+
+  it('Attempts asking question with no title.', async () => {
+    const inv = dummyQuestionInput.toJSON();
+    inv.question.title = '';
+    const req = {body: inv};
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn().mockReturnThis(),
+    };
+    await questionPostController(req, res);
+    expect(res.json).toHaveBeenCalledWith({
+      message: questionEmptyMessage,
+    });
+    expect(res.status).toHaveBeenCalledWith(400);
   });
 });
 

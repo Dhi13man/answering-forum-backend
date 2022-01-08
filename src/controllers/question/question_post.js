@@ -9,12 +9,11 @@ import {authValidatedUser} from '../login_post';
  * @param {Express.Response} res - The response object.
  */
 const questionPostController = async (req, res) => {
-  // First and foremost there must be a question to post.
-  if (!req.body.question) {
-    res.status(400).json({message: 'Question cannot be empty.'});
+  const question = req.body.question;
+  if (!validateQuestionInput(question)) {
+    res.status(400).json({message: 'Question and its title cannot be empty.'});
     return;
   }
-
   const questionInput = QuestionInputModel.fromJSON(
       req.body,
       await getNextQuestionID(),
@@ -53,3 +52,11 @@ const askQuestion = async (question, res) => {
   }
 };
 
+
+/**
+ * Validate the question input sent in the request.
+ * @param {object} question - The data of the question.
+ * @return {boolean} - Whether the answer input is valid.
+ */
+const validateQuestionInput = (question) =>
+  question && String(question.title).length > 0;
