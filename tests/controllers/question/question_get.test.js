@@ -2,7 +2,7 @@ import {questionGetIDController, questionGetUsernameController}
   from '../../../src/controllers/question/question_get';
 import {QuestionData} from '../../../src/models/question_data';
 import {createQuestion, deleteQuestion}
-  from '../../../../src/repositories/questions';
+  from '../../../src/repositories/questions';
 
 describe('Question Controller Tests', () => {
   // Dummy User for auth.
