@@ -9,6 +9,8 @@
 
 A Node.js Express backend for a Stackoverflow like answering forum, with RESTful endpoints, written in es6 style with linted and comprehensively unit-tested code. Utilizes a local json database using fs but has full separation of concern to implement anything else.
 
+Created as a part of week 0 of Swiggy i++ learning programme, round 2.
+
 ## Contents
 
 - [answering-forum-backend](#answering-forum-backend)
@@ -41,20 +43,23 @@ The project's code structure loosely follows MVC model while maintaing complete 
 - answering-forum-backend
   - src
     - controllers
-      - login.js
+      - login_post.js
       - answers
         - answer_post.js
       - questions
         - question_get.js
         - question_post.js
-      - register.js
+      - register_post.js
     - database
+      - answers.json
       - questions.json
       - users.json
     - models
+      - answer_data.js
       - question_data.js
       - user_data.js
     - repositories
+      - answers.js
       - questions.js
       - users.js
     - routes
@@ -70,13 +75,19 @@ The project's code structure loosely follows MVC model while maintaing complete 
     - index.js
   - tests
     - controllers
-      - login.test.js
-      - question.test.js
-      - register.test.js
+      - answer
+        - answer_post.test.js
+      - question
+        - question_get.test.js
+        - question_post.test.js
+      - login_post.test.js
+      - register_post.test.js
     - database
+      - answers.test.json
       - questions.test.json
       - users.test.json
     - repositories
+      - answers.test.js
       - questions.test.js
       - users.test.js
   - .eslintrc.yml
