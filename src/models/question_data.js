@@ -88,10 +88,7 @@ export class QuestionUser {
    * - password - The password of the user asking the question.
    * @return {QuestionUser} object of the QuestionUser.
    */
-  static fromJSON = (json) => new QuestionUser(
-      json.username,
-      json.password,
-  );
+  static fromJSON = (json) => new QuestionUser(json.username, json.password);
 
   /**
    * Utility method to convert the user data to a json object.
@@ -99,10 +96,7 @@ export class QuestionUser {
    * - username - The username of the user asking the question.
    * - password - The password of the user asking the question.
    */
-  toJSON = () => ({
-    'password': this.password,
-    'username': this.username,
-  });
+  toJSON = () => ({'password': this.password, 'username': this.username});
 }
 
 /**

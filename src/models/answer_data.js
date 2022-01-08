@@ -92,10 +92,7 @@ export class AnswerUser {
    * - username - The username of the user sending the answer.
    * - password - The password of the user sending the answer.
    */
-  toJSON = () => ({
-    password: this.password,
-    username: this.username,
-  });
+  toJSON = () => ({password: this.password, username: this.username});
 }
 
 /**
