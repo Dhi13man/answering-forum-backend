@@ -50,7 +50,8 @@ export const questionGetUsernameController = async (req, res) => {
       });
     } else {
       res.status(401).json({
-        message: `Could not authenticate user. Enter valid details.`,
+        message: 'Could not authenticate user. ' +
+                'Enter username and password in request body.',
       });
     }
   } catch (err) {
