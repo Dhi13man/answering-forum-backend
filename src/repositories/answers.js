@@ -120,7 +120,7 @@ export const getAllAnswersForQuestion = async (
 ) => {
   const answers = await getDatabase(dbPathOverride);
   const answerIDs = Object.keys(answers).filter(
-      (answerID) => parseAnswerID(answerID).questionID === questionID,
+      (answerID) => parseAnswerID(answerID).questionID === String(questionID),
   );
   return answerIDs.map((answerID) => AnswerData.fromJSON(answers[answerID]));
 };

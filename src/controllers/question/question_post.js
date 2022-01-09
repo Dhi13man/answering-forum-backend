@@ -1,5 +1,7 @@
 import {QuestionInputModel} from '../../models/question_data';
-import {authValidatedUser} from '../../repositories/authentication';
+import {
+  authValidatedUser, getUsernameFromHeader,
+} from '../../repositories/authentication';
 import {createQuestion, getNextQuestionID} from '../../repositories/questions';
 
 /**
@@ -24,6 +26,8 @@ const questionPostController = async (req, res) => {
         user.username, user.password, req.headers,
     );
     if (authVal) {
+      questionInput.question.username =
+        questionInput.question.username || getUsernameFromHeader(req.headers);
       await askQuestion(questionInput.question, res);
     } else {
       res.status(401).json({

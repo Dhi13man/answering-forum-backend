@@ -72,7 +72,7 @@ export const questionGetUsernameController = async (req, res) => {
 const buildQuestionAnswerData = async (questions) => {
   const responseData = [];
   for (const question of questions) {
-    const answers = await getAllAnswersForQuestion(question.id);
+    const answers = await getAllAnswersForQuestion(question.question_id);
     responseData.push({
       question: question.toJSON(),
       answers: answers.map((answer) => answer.toJSON()),

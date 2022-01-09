@@ -31,8 +31,7 @@ export const authValidatedUser = async (username, password, headers={}) => {
   const user = await getUser(username);
   const val = user && user.password === password;
   // Validate using JWT.
-  const auth = String(headers.authorization);
-  const token = auth.startsWith('Bearer') && auth.split(' ')[1];
+  const token = getBearerToken(headers);
   const jwtVal = await authJWTValidatedUser(token);
   return jwtVal || val;
 };
@@ -59,6 +58,16 @@ const authJWTValidatedUser = async (token) => {
 };
 
 /**
+ * Gets the Username from a JWT authorization header
+ * @param {object} headers - The request headers object.
+ * @return {string} The username of the user.
+ */
+export const getUsernameFromHeader = (headers) => headers ?
+  jwt.verify(
+      getBearerToken(headers), process.env.JWT_SECRET || 'test',
+  ).username : undefined;
+
+/**
  * Hashes a password using bcrypt.
  * @param {string} password - Plain text password
  * @return {string} - Hashed password
@@ -77,3 +86,14 @@ const hashPassword = (password) => {
  */
 const verifyHashPassword = (hash, password) =>
   bcrypt.compareSync(password, hash);
+
+/**
+ * Gets the bearer token from the headers in the request.
+ * @param {object} headers - The request headers.
+ * @return {string} The bearer token.
+ */
+const getBearerToken = (headers) => {
+  const auth = String(headers.authorization);
+  return auth.startsWith('Bearer') && auth.split(' ')[1];
+};
+

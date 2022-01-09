@@ -1,10 +1,10 @@
 import {AnswerInputModel} from '../../models/answer_data';
 import {
-  createAnswer,
-  updateAnswer,
-  getAnswer,
+  createAnswer, updateAnswer, getAnswer,
 } from '../../repositories/answers';
-import {authValidatedUser} from '../../repositories/authentication';
+import {
+  authValidatedUser, getUsernameFromHeader,
+} from '../../repositories/authentication';
 import {getQuestion} from '../../repositories/questions';
 
 /**
@@ -32,6 +32,8 @@ const answerPostController = async (req, res, method='POST') => {
     const authVal = await authValidatedUser(
         user.username, user.password, req.headers,
     );
+    answerInput.answer.username =
+      answerInput.answer.username || getUsernameFromHeader(req.headers);
     await validateAndPOST(method, authVal, answerInput.answer, res);
     await validateAndPUT(
         method, questionID, user, authVal, answerInput.answer, res,
