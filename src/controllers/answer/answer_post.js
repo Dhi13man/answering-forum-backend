@@ -4,7 +4,7 @@ import {
   updateAnswer,
   getAnswer,
 } from '../../repositories/answers';
-import {authValidatedUser} from '../login_post';
+import {authValidatedUser} from '../../repositories/authentication';
 
 /**
  * Used by /answer route to validate a user's credentials before either

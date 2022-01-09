@@ -30,3 +30,4 @@ jobs:
     - run: npm test -- --runInBand --watchAll=false
       env: 
         JWT_Secret: ${{ secrets.JWT_Secret }}
+        ITERATIONS: ${{ secrets.ITERATIONS }}

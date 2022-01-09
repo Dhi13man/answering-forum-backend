@@ -1,8 +1,8 @@
 import {getAllAnswersForQuestion} from '../../repositories/answers';
+import {authValidatedUser} from '../../repositories/authentication';
 import {
   getAllQuestionsForUsername, getQuestion,
 } from '../../repositories/questions';
-import {authValidatedUser} from '../login_post';
 
 /**
  * Used by /question/:qid route to get a question and its answers by
