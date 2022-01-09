@@ -20,7 +20,7 @@ describe('Questions repository Tests', () => {
   const dummyQuestion = QuestionData.fromJSON({
     title: dummyTitle,
     body: dummyBody,
-    questionID: dummyID,
+    question_id: dummyID,
     username: dummyUserName,
   });
 
@@ -30,7 +30,7 @@ describe('Questions repository Tests', () => {
   const updatedDummyQuestion = QuestionData.fromJSON({
     title: updatedDummyTitle,
     body: updatedDummyBody,
-    questionID: dummyID,
+    question_id: dummyID,
   });
 
   // Response messages to be expected
