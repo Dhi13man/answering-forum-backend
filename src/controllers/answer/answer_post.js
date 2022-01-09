@@ -88,7 +88,11 @@ const validateAndPUT = async (
   const existing = await getAnswer(questionID, user.username);
   if (authVal && method === 'PUT' && existing) {
     await putAnswer(answer, res);
-  } else if (method === 'PUT') {
+  } else if (authVal && method === 'PUT') {
+    res.status(404).json({
+      message: 'Answer does not exist to update!',
+    });
+  } else {
     res.status(403).json({
       message: 'Invalid credentials. Cannot update answer.',
     });
