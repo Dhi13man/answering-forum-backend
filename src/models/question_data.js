@@ -129,6 +129,7 @@ export class QuestionData {
    * - body - The body of the question.
    * - question-id (or question_id) - The id of the question (optional). Always
    *   parsed to number for consistency. Throws error if not a number.
+   * - username - The username of the user asking the question.
    * @param {number} questionID - The id of the question. Priority is given
    * to the id in the json object if both are given.
    * @return {QuestionData} object of the QuestionData.
@@ -136,7 +137,7 @@ export class QuestionData {
   static fromJSON = (json, questionID) => new QuestionData(
       json.title,
       json.body,
-      Number(json['question-id'] || json.questionID || questionID),
+      Number(json['question-id'] || json.question_id || questionID),
       json.username,
   );
 
@@ -147,6 +148,7 @@ export class QuestionData {
    * - body - The body of the question.
    * - question-id - The id of the question (optional). Always returned
    * as string for convenience but is numeric.
+   * - username - The username of the user asking the question.
    */
   toJSON = () => ({
     'title': this.title,

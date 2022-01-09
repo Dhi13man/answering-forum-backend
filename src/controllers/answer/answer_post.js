@@ -5,6 +5,7 @@ import {
   getAnswer,
 } from '../../repositories/answers';
 import {authValidatedUser} from '../../repositories/authentication';
+import {getQuestion} from '../../repositories/questions';
 
 /**
  * Used by /answer route to validate a user's credentials before either
@@ -14,16 +15,19 @@ import {authValidatedUser} from '../../repositories/authentication';
  * @param {string} method - The HTTP method of the request.
  */
 const answerPostController = async (req, res, method='POST') => {
-  const answer = req.body.answer;
-  const questionID = req.params.qID;
-  if (!validateAnswerInput(answer, questionID)) {
-    res.status(400)
-        .json({message: 'Answer text and question ID cannot be empty.'});
-    return;
-  }
-  const answerInput = AnswerInputModel.fromJSON(req.body);
-  answerInput.answer.question_id = questionID;
   try {
+    const answer = req.body.answer;
+    const questionID = req.params.qID;
+    if (!validateAnswerInput(answer, questionID)) {
+      res.status(400)
+          .json({message: 'Answer text and question ID cannot be empty.'});
+      return;
+    } else if (!await validateQuestionID(questionID)) {
+      res.status(404).json({message: 'Question does not exist.'});
+      return;
+    }
+    const answerInput = AnswerInputModel.fromJSON(req.body);
+    answerInput.answer.question_id = questionID;
     const user = answerInput.user_details;
     const authVal = await authValidatedUser(
         user.username, user.password, req.headers,
@@ -127,10 +131,17 @@ const putAnswer = async (answer, res) => {
 
 /**
  * Validate the answer input sent in the request
- * @param {string} answer - The answer text.
+ * @param {object} answer - The answer body.
  * @param {string} questionID - The ID of the question associated.
  * @return {boolean} - Whether the answer input is valid.
  */
 const validateAnswerInput = (answer, questionID) =>
-  answer && questionID && String(answer.answer).length > 0;
+  answer && answer.answer && String(answer.answer).length > 0 && questionID;
 
+/**
+ * Validate the question ID sent in the request
+ * @param {string} questionID - The ID of the question associated.
+ * @return {Promise<boolean>} - Whether question having the ID exists or not.
+ */
+const validateQuestionID = async (questionID) =>
+  questionID && getQuestion(questionID);
