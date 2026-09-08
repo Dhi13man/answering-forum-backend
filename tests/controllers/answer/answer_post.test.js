@@ -8,8 +8,22 @@ import {
 import {
   createQuestion, deleteQuestion,
 } from '../../../src/repositories/questions';
+import fs from 'fs/promises';
+
+const questionsDBPath = './src/database/questions.json';
+const answersDBPath = './src/database/answers.json';
+
+/** Tests share the JSON databases; reset them so a partial write cannot leak. */
+const resetSharedJsonFixtures = async () => {
+  await fs.writeFile(questionsDBPath, '{}');
+  await fs.writeFile(answersDBPath, '{}');
+};
+
 
 describe('Answer POST/PUT Controller Tests', () => {
+  beforeEach(resetSharedJsonFixtures);
+  afterEach(resetSharedJsonFixtures);
+
   // Dummy Question for answers
   const dummyQID = '-1';
   const question = QuestionData.fromJSON({
