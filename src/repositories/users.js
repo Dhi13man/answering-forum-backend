@@ -25,7 +25,7 @@ export const createUser = async (userData, dbPathOverride=usersDBPath) => {
     throw alreadyExistsError(userData.username);
   }
   users[userData.username] = userData.toJSON();
-  fs.writeFile(dbPathOverride, JSON.stringify(users));
+  await fs.writeFile(dbPathOverride, JSON.stringify(users));
   return true;
 };
 
@@ -73,7 +73,7 @@ export const updateUser = async (
     ...obj,
     username: username,
   };
-  fs.writeFile(dbPathOverride, JSON.stringify(users));
+  await fs.writeFile(dbPathOverride, JSON.stringify(users));
   return true;
 };
 
@@ -91,7 +91,7 @@ export const deleteUser = async (username, dbPathOverride=usersDBPath) => {
     throw doesNotExistError(username);
   }
   delete users[username];
-  fs.writeFile(dbPathOverride, JSON.stringify(users));
+  await fs.writeFile(dbPathOverride, JSON.stringify(users));
 };
 
 /**

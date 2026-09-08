@@ -27,7 +27,7 @@ export const createAnswer = async (answer, dbPathOverride=answersDBPath) => {
     throw alreadyExistsError(answer.question_id, answer.username);
   }
   answers[aID] = answer.toJSON();
-  fs.writeFile(dbPathOverride, JSON.stringify(answers));
+  await fs.writeFile(dbPathOverride, JSON.stringify(answers));
   return true;
 };
 
@@ -80,7 +80,7 @@ export const updateAnswer = async (answer, dbPathOverride=answersDBPath) => {
     'question-id': answers[aID]['question-id'],
     'username': answers[aID].username,
   };
-  fs.writeFile(dbPathOverride, JSON.stringify(answers));
+  await fs.writeFile(dbPathOverride, JSON.stringify(answers));
   return true;
 };
 
@@ -103,7 +103,7 @@ export const deleteAnswer = async (
     throw doesNotExistError(questionID, username);
   }
   delete answers[aID];
-  fs.writeFile(dbPathOverride, JSON.stringify(answers));
+  await fs.writeFile(dbPathOverride, JSON.stringify(answers));
 };
 
 /**

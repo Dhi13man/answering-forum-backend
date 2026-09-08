@@ -3,8 +3,22 @@ import {questionGetIDController, questionGetUsernameController}
 import {QuestionData} from '../../../src/models/question_data';
 import {createQuestion, deleteQuestion}
   from '../../../src/repositories/questions';
+import fs from 'fs/promises';
+
+const questionsDBPath = './src/database/questions.json';
+const answersDBPath = './src/database/answers.json';
+
+/** Tests share the JSON databases; reset them so a partial write cannot leak. */
+const resetSharedJsonFixtures = async () => {
+  await fs.writeFile(questionsDBPath, '{}');
+  await fs.writeFile(answersDBPath, '{}');
+};
+
 
 describe('Question GET Controller Tests', () => {
+  beforeEach(resetSharedJsonFixtures);
+  afterEach(resetSharedJsonFixtures);
+
   // Dummy User for auth.
   const userName = 'logintest@abc.com';
   const userPassword = 'asdasdasga';
